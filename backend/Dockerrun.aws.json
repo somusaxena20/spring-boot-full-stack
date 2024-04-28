@@ -1,0 +1,23 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "somu-api",
+      "image": "somusaxena20/somu-api",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 1000
+        }
+      ],
+      "environment" : [
+        {
+          "name" : "SPRING_DATASOURCE_URL",
+          "value" : "jdbc:postgresql://awseb-e-7p2ndyaciq-stack-awsebrdsdatabase-v8puyrn2owoe.cfqeece6s1ba.ap-south-1.rds.amazonaws.com:5432/somuuat"
+        }
+      ]
+    }
+  ]
+}
