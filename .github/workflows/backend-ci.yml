@@ -34,6 +34,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
+      - name: Pull base image with specific digest
+        run: |
+          docker pull eclipse-temurin:17-jdk-jammy
+          export BASE_IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' eclipse-temurin:17-jdk-jammy | cut -d@ -f2)
       - name: Build and run Unit/Integration Tests with Maven
         run: mvn -ntp -B verify
       - name: Build and push Docker image
@@ -45,5 +49,5 @@ jobs:
           echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
           
           # Build and push Docker image
-          docker build -t somusaxena20/somu-api .
+          docker build --build-arg BASE_IMAGE_DIGEST=${BASE_IMAGE_DIGEST} -t somusaxena20/somu-api .
           docker push somusaxena20/somu-api
