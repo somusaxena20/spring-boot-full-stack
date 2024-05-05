@@ -1,9 +1,9 @@
 name: CD - Deploy Backend
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ master ]
+    branches:
+      - master
     paths:
       - 'backend/**'
 
@@ -43,14 +43,14 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       - name: Set Build Number
         id: build-number
-        run: echo "BUILD_NUMBER=$(TZ=Asia/Kolkata date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
+        run: echo "BUILD_NUMBER=$(TZ=Asia/Kolkata date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_ENV
       - name: Build Package Push With Maven
-        run: mvn -ntp -B verify -Ddocker.image.tag=${{step.build-number.outputs.BUILD_NUMBER}} jib:build
+        run: mvn -ntp -B verify -Ddocker.image.tag=${{ steps.build-number.outputs.BUILD_NUMBER }} jib:build
       - name: UPDATE Dockerrun.aws.json api image tag with build number
         run: |
           echo "Dockerrun.aws.json before updating tag"
           cat Dockerrun.aws.json
-          sed -i -E 's_(somusaxena20/somu-api:)([^"]*)_\1'${{step.build-number.outputs.BUILD_NUMBER}}'_' Dockerrun.aws.json
+          sed -i -E 's_(somusaxena20/somu-api:)([^"]*)_\1'${{ steps.build-number.outputs.BUILD_NUMBER }}'_' Dockerrun.aws.json
           echo "Dockerrun.aws.json after updating tag"
           cat Dockerrun.aws.json
       - name: Deploy to Elastic Beanstalk
@@ -60,8 +60,8 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: ${{ secrets.EB_APPLICATION_NAME }}
           environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
-          version_label: ${{step.build-number.outputs.BUILD_NUMBER}}
-          version_description: ${{ github.SHA }}
+          version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
+          version_description: ${{ github.sha }}
           region: ${{ secrets.EB_REGION }}
           deployment_package: backend/Dockerrun.aws.json
       - name: Commit and push Dockerrun.aws.json
@@ -69,5 +69,5 @@ jobs:
           git config user.name github-actions
           git config user.email github-action@github.com
           git add .
-          git commit -m "Update Dockerrun.aws.json docker image with new tag ${{step.build-number.outputs.BUILD_NUMBER}}"
+          git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
           git push
