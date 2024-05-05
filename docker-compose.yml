@@ -2,7 +2,7 @@ version: '3.7'
 services:
   db:
     container_name: postgres
-    image: postgres:15.5
+    image: postgres:16.1
     environment:
       POSTGRES_USER: somu
       POSTGRES_PASSWORD: password

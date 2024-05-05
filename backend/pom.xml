@@ -20,7 +20,7 @@
         <docker.image.name>somu-api</docker.image.name>
         <springdoc.version>1.6.6</springdoc.version>
 <!--        <docker.image.tag>latest</docker.image.tag>-->
-<!--        <docker.image.tag/>-->
+        <docker.image.tag/>
 <!--        <docker.image.tag/>-->
     </properties>
     <dependencies>
@@ -193,7 +193,7 @@
                         </platforms>
                     </from>
                     <to>
-                        <image>registry.hub.docker.com/${docker.username}/${docker.image.name}:${project.version}</image>
+                        <image>registry.hub.docker.com/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
                         <tags>
                             <tag>
                                 latest
