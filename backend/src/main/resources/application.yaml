@@ -28,3 +28,9 @@ springdoc:
     filter: true
   api-docs:
     path: /somu-api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
