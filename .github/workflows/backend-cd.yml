@@ -74,7 +74,7 @@ jobs:
       - name: Send Slack Message Docker Image Push
         run: |
           curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":":docker: Image tag:${{steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/repository/docker/somusaxena20/somu-api"}' \
+            --data '{"text":":partydocker: Image tag:${{steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/repository/docker/somusaxena20/somu-api"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Update Dockerrun.aws.json  api image tag with new build number
