@@ -41,6 +41,18 @@ jobs:
           --data '{"text":":among-us-party: Deployment started :bitbucket-progress: :x-fingers:"}' \
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
+      - name: Send Discord Message
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": ":party-github: https://github.com/somusaxena20/spring-boot-full-stack/commit/${{ github.sha }} - ${{ github.event.head_commit.message }} "}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: Send Discord Message
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": ":party-github: Started Workflow :completed:"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -67,9 +79,21 @@ jobs:
             --data '{"text":":maven: Building with Maven :maven:"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
 
+      - name: Send Discord Message OF MAVEN BUILD
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": ":maven: Building with Maven :maven:"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
       - uses: actions/checkout@v3
+
+      - name: Send Discord Message Docker Image Push
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": ":partydocker: Image tag:${{steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/repository/docker/somusaxena20/somu-api"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Send Slack Message Docker Image Push
         run: |
@@ -91,6 +115,12 @@ jobs:
             --data '{"text":":aws: Starting deployment to Elastic Beanstalk :progress_bar:"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
 
+      - name: Send Discord Message Of Elastic bean
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": ":aws: Starting deployment to Elastic Beanstalk :progress_bar:"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
@@ -109,6 +139,12 @@ jobs:
             --data '{"text":":aws: Completed deployment to Elastic Beanstalk :done:"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
 
+      - name: Send Discord Message
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": ":aws: Completed deployment to Elastic Beanstalk :done:"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
       - name: Commit and push Dockerrun.aws.json
         run: |
           git config user.name github-actions
@@ -122,3 +158,9 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
             --data '{"text":":party-github: Completed Workflow :completed:"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Discord Message
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": ":party-github: Completed Workflow :completed:"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
