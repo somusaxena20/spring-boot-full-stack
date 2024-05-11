@@ -35,11 +35,11 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
           --data '{"text":":party-github: https://github.com/somusaxena20/spring-boot-full-stack/commit/${{ github.sha }} - ${{ github.event.head_commit.message }} "}' \
           ${{ secrets.SLACK_WEBHOOK_URL }}
-          - name: Send Slack Message
-            run: |
-              curl -X POST -H 'Content-type: application/json' \
-              --data '{"text":":among-us-party: Deployment started :bitbucket-progress: :x-fingers:"}' \
-              ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Send Slack Message
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":":among-us-party: Deployment started :bitbucket-progress: :x-fingers:"}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Checkout code
         uses: actions/checkout@v3
