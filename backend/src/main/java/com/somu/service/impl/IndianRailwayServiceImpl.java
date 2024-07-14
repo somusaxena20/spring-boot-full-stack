@@ -5,6 +5,7 @@ import com.somu.repo.IndianRailwayCustomerRepo;
 import com.somu.service.IndianRailwayService;
 import com.somu.utils.RequestSend;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,8 +18,10 @@ public class IndianRailwayServiceImpl implements IndianRailwayService {
     @Autowired
     private RequestSend requestSend;
     //org api
-    private final String apiKey = "c7e27cac7bmsh94f5195e115eb79p190b05jsne25693aaf370";
-    private final String host = "irctc1.p.rapidapi.com";
+    @Value("${indian.railway.apikey}")
+    private String apiKey;
+    @Value("${indian.railway.host}")
+    private String host;
 
 
     @Override
