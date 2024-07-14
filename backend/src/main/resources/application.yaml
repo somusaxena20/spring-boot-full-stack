@@ -3,7 +3,7 @@ server:
     include-message: always
   servlet:
     context-path: /API_SERVER
-  port: 1001
+  port: 1000
 spring:
   profiles:
     active: uat
