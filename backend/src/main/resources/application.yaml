@@ -34,3 +34,12 @@ management:
     web:
       exposure:
         include: '*'
+
+cors:
+  allowed-origins: "*"
+  allowed-methods: "*"
+
+indian:
+  railway:
+    apikey: "c7e27cac7bmsh94f5195e115eb79p190b05jsne25693aaf370"
+    host: "irctc1.p.rapidapi.com"
