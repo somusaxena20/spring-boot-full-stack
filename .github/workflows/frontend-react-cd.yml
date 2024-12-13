@@ -18,10 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Slack commit message and sha
-        run: >
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":":party-github: https://github.com/somusaxena20/spring-boot-full-stack/commit/${{ github.sha }} - ${{ github.event.head_commit.message }} "}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+#        run: >
+#          curl -X POST -H 'Content-type: application/json' \
+#          --data '{"text":":party-github: https://github.com/somusaxena20/spring-boot-full-stack/commit/${{ github.sha }} - ${{ github.event.head_commit.message }} "}' \
+#          ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Send Slack Message
         run: |
           curl -X POST -H 'Content-type: application/json' \
@@ -73,17 +73,17 @@ jobs:
           deployment_package: Dockerrun.aws.json
           wait_for_environment_recovery: 60
       - name: Send Slack Message
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":":githubloading: Committing to repo https://github.com/somusaxena20/spring-boot-full-stack"}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
+#        run: |
+#          curl -X POST -H 'Content-type: application/json' \
+#            --data '{"text":":githubloading: Committing to repo https://github.com/somusaxena20/spring-boot-full-stack"}' \
+#            ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Commit and push Dockerrun.aws.json
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add ../../Dockerrun.aws.json
-          git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
-          git push
+#          git add ../../Dockerrun.aws.json
+#          git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
+#          git push
       - name: Send Slack Message
         run: |
           curl -X POST -H 'Content-type: application/json' \
