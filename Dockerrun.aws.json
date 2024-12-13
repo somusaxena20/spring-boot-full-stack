@@ -1,0 +1,43 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "somu-react-container",
+      "image": "somusaxena20/somu-react",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 5173
+        }
+      ]
+    },
+    {
+      "name": "somu-api-container",
+      "image": "somusaxena20/somu-api",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 8080,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value" : "jdbc:postgresql://awseb-e-7p2ndyaciq-stack-awsebrdsdatabase-v8puyrn2owoe.cfqeece6s1ba.ap-south-1.rds.amazonaws.com:5432/somuuat"
+        },
+        {
+          "name": "SPRING_DATASOURCE_USERNAME",
+          "value": "somu"
+        },
+        {
+          "name": "SPRING_DATASOURCE_PASSWORD",
+          "value": "password"
+        }
+      ]
+    }
+  ]
+}
