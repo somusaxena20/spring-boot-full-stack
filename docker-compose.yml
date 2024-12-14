@@ -27,6 +27,18 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+  somu-react:
+    container_name: somu-react
+    image: somusaxena20/somu-react:latest
+    build:
+      context: frontend/react
+      args:
+        api_base_url: http://localhost:1000
+    ports:
+      - "3000:5173"
+    depends_on:
+      - somu-api
+    restart: unless-stopped
 
 networks:
   db:

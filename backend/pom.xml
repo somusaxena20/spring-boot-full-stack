@@ -215,7 +215,7 @@
                         </platforms>
                     </from>
                     <to>
-                        <image>registry.hub.docker.com/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
+                        <image>registry.hub.docker.com/${docker.username}/${docker.image.name}:latest</image>
                         <tags>
                             <tag>
                                 latest

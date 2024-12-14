@@ -16,14 +16,14 @@ public class ProcessUsageServiceImpl implements ProcessUsageService {
     @Override
     public Object getMetrics() {
         String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        System.out.println("Base url : "+baseUrl);
+        System.out.println("Metric url : "+baseUrl+"/actuator/metrics");
         return restTemplate.getForObject(baseUrl+"/actuator/metrics", Object.class);
     }
 
     @Override
     public Object getMetricBasedOnProcess(String processName) {
         String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        System.out.println("Base url : "+baseUrl+" Metrics based on process : "+processName);
+        System.out.println("Base url : "+baseUrl+"/actuator/metrics/"+processName);
         return restTemplate.getForObject(baseUrl+"/actuator/metrics/"+processName, Object.class);
     }
 }

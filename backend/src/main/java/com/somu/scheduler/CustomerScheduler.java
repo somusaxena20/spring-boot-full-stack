@@ -28,7 +28,7 @@ public class CustomerScheduler {
         Name name = faker.name();
         String firstName = name.firstName();
         String lastName = name.lastName();
-        customerRepo.saveAll(List.of(new Customer(firstName+" "+lastName, firstName.toLowerCase()+"."+lastName.toLowerCase()+"@code.buster", new Random().nextInt(10, 99))));
+        customerRepo.saveAll(List.of(new Customer(firstName+" "+lastName, firstName.toLowerCase()+"."+lastName.toLowerCase()+"@code.buster", new Random().nextInt(10, 99), "MALE")));
         System.out.println("End Scheduled Customer Inserted...");
     }
 }
