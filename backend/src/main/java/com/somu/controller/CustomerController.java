@@ -25,7 +25,9 @@ public class CustomerController {
     @GetMapping("/")
     public ResponseEntity<?> getCustomer()
     {
-        return new ResponseEntity<>(new CustomResponse(customerService.getAllCustomer()), HttpStatus.OK);
+        CustomResponse customResponse = new CustomResponse(customerService.getAllCustomer());
+        System.out.println("Get Customer Response : "+customResponse);
+        return new ResponseEntity<>(customResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

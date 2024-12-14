@@ -55,9 +55,9 @@ public class CustomerJdbcImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        String sql = "INSERT INTO customer(name, email, age) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO customer(name, email, age, gender) VALUES(?, ?, ?, ?)";
         try{
-            int update = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge());
+            int update = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge(), customer.getGender().name());
             System.out.println("Insert Status : "+update);
         }
         catch (Exception e)
