@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Slack commit message and sha
-#        run: >
+        run: >
 #          curl -X POST -H 'Content-type: application/json' \
 #          --data '{"text":":party-github: https://github.com/somusaxena20/spring-boot-full-stack/commit/${{ github.sha }} - ${{ github.event.head_commit.message }} "}' \
 #          ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -73,7 +73,7 @@ jobs:
           deployment_package: Dockerrun.aws.json
           wait_for_environment_recovery: 60
       - name: Send Slack Message
-#        run: |
+        run: |
 #          curl -X POST -H 'Content-type: application/json' \
 #            --data '{"text":":githubloading: Committing to repo https://github.com/somusaxena20/spring-boot-full-stack"}' \
 #            ${{ secrets.SLACK_WEBHOOK_URL }}
